@@ -10,6 +10,9 @@ app.get("/", (req, res)=> {
     res.send("Server running")
 })
 
+app.get("/products", async(req, res)=>{
+    res.send("all products")
+})
 app.listen(port, ()=>{
     console.log(`ecommerce web running ${port}`)
 })
