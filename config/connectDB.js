@@ -17,3 +17,5 @@ const connectDB  = async () => {
 
 
 module.exports = connectDB
+
+// MONGO URL = mongodb+srv://walmart:eHHnoozXkgiDQ1BO@cluster0.gaysmtl.mongodb.net/?retryWrites=true&w=majority

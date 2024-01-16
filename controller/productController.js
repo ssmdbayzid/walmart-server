@@ -51,8 +51,10 @@ exports.getSingleProduct = async(req, res)=>{
 
 exports.updateProduct = async (req, res)=>{
     const id = req.params.id;
+    console.log(id)
+    console.log(req.body)
     try {
-        const updatedProduct = new Product.findByIdAndUpdate(id, req.body, {
+        const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
             new: true
         })
         

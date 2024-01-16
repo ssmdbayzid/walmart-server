@@ -7,6 +7,7 @@ const  cors = require("cors")
 const body_parser = require("body-parser")
 const connectDB = require("./config/connectDB")
 const productRoute = require("./Routes/productRoute")
+const authRoute = require("./Routes/authRoute")
 
 app.use(express.json())
 app.use(cors())
@@ -22,6 +23,7 @@ app.get("/", (req, res)=> {
 
 // -------------- Router  -------------
 app.use("/api/v1/products/", productRoute)
+app.use("/api/v1/auth/", authRoute)
 
 
 app.listen(port, ()=>{
