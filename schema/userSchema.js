@@ -8,6 +8,38 @@ const userSchema = new mongoose.Schema({
         enum: ["user", "admin"],
         default: "user"
     },
+    billing_address: {
+        address: {
+            type: String,
+            trim: true,
+            required: true,
+        },
+        post_office: {
+            type: String,
+            trim: true,
+            required: true,
+        },
+        police_station: {
+            type: String,
+            trim: true,
+            required: true,
+        },
+        district: {
+            type: String,
+            trim: true,
+            required: true,
+        },
+        mobile_no: {
+            type: Number,
+            trim: true,
+            required: true,
+        },
+        email: {
+            type: String,
+            trim: true,
+            required: true,
+        },
+    },    
     order: [
         {
             type: mongoose.Types.ObjectId, ref: "Order"

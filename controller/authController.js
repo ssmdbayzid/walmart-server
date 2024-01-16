@@ -7,11 +7,11 @@ const jwt = require("jsonwebtoken")
 
 const generateAccessToken = email => {    
     
-    return jwt.sign({email:email.email}, process.env.ACCESS_TOKEN, {expiresIn: "24h"})    
+    return jwt.sign({email:email}, process.env.ACCESS_TOKEN, {expiresIn: "24h"})    
 }
 //-------------- Generate Refresh Token -----------------
-const generateRefreshToken =email => {    
-    return jwt.sign({email:email}, process.env.REFRESH_TOKEN, {expiresIn: "10s"})    
+const generateRefreshToken = email => {    
+    return jwt.sign({email: email}, process.env.REFRESH_TOKEN, {expiresIn: "10s"})    
 }
 
 
@@ -39,8 +39,8 @@ exports.getToken = async (req, res)=>{
         if(!user){
             return res.status(400).json({message: "User or password invalid"})
         }
-        const accessToken = generateAccessToken(user)
-        const refreshToken = generateRefreshToken(user)        
+        const accessToken = generateAccessToken(user.email)
+        const refreshToken = generateRefreshToken(user.email)        
     
 
        return res
@@ -54,8 +54,7 @@ exports.getToken = async (req, res)=>{
 }
 
 exports.refreshToken = async (req, res)=>{  
-    const {email} = req.body;   
-    const bearer = req.headers.authorization    
+    const {email} = req.body;       
     const accessToken = generateAccessToken(email)
     return res
     .status(200).json({success: true, accessToken, messag: "New  accesstoken generated"})    
