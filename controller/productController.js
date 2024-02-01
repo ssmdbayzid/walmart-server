@@ -17,10 +17,9 @@ exports.createProduct = async (req, res)=>{
 //------------ Get All Products ---------------
 
 exports.getAllproducts = async (req, res)=>{
-
     try {
         const data = await Product.find()        
-        console.log(data)
+        
         return res
         .status(200).json({success: true, data})
 

@@ -6,76 +6,48 @@ const orderSchema = new mongoose.Schema({
         trim: true,
         required: true,
     },
-    productId: {
+   
+    email: {
         type: String,
         trim: true,
         required: true,
     },
-    customer_name: {
-        type: String,
-        trim: true,
-        required: true,
+    cartItems: {
+        type: Array,
+        required: true
     },
-    shipping_address: {
+    shippingAddress: {
+        name: {
+            type: String,
+            trim: true,
+            required: true,
+        },
+        mobile: {
+            type: String,
+            trim: true,
+            required: true,
+        },
         address: {
             type: String,
             trim: true,
             required: true,
         },
-        post_office: {
+        town: {
             type: String,
             trim: true,
             required: true,
         },
-        police_station: {
+        region: {
             type: String,
-            trim: true,
-            required: true,
-        },
-        district: {
-            type: String,
-            trim: true,
-            required: true,
-        },
-        mobile_no: {
-            type: Number,
-            trim: true,
-            required: true,
-        },
-    },
-    billing_address: {
-        address: {
-            type: String,
-            trim: true,
-            required: true,
-        },
-        post_office: {
-            type: String,
-            trim: true,
-            required: true,
-        },
-        police_station: {
-            type: String,
-            trim: true,
-            required: true,
-        },
-        district: {
-            type: String,
-            trim: true,
-            required: true,
-        },
-        mobile_no: {
-            type: Number,
-            trim: true,
-            required: true,
-        },        
+            trim: true,           
+        },       
     },    
     total_price: {
         type: Number,
         trim: true,
         required: true,
     },
-    paid: {
+    status: {
         type: String,
         trim: true,
         required: true,

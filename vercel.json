@@ -1,5 +1,21 @@
+
 {
-    "version": 2,
-    "builds": [{ "src": "server.js", "use": "@now/node" }]
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "index.js"
+    }
+  ],
+  "env": {      
+    "MONGO_URL": "mongodb+srv://walmart:eHHnoozXkgiDQ1BO@cluster0.gaysmtl.mongodb.net/?retryWrites=true&w=majority",
+    "ACCESS_TOKEN": "0470e5bd6c058ec7b87091dc5a6c80e6b3f42c11eae5c0fcecdd8b36af2fb603981b091a7e29b458c0370733684e6e07",
+    "REFRESH_TOKEN": "0126c4f8064f2e3b7608c0a204d2c53aafd2db5fe7cec70e77dc72565700c72990efa88b6b0b062d452c461935a0333419523e63947c9d5b22af2bec0419ec34"
   }
-  
+}

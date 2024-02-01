@@ -4,9 +4,9 @@ const { authenticate, restrict } = require("../utls/verifyToken")
 const productRoute = require("express").Router()
 
 productRoute.post("/", createProduct)
-productRoute.get("/", authenticate, getAllproducts)
-productRoute.get("/:id", authenticate,  restrict(["user"]), getSingleProduct)
-productRoute.put("/:id", authenticate, restrict(["user"]), updateProduct)
-productRoute.delete("/:id", authenticate, restrict(["user"]), deleteProduct)
+productRoute.get("/", getAllproducts)
+productRoute.get("/:id",  getSingleProduct)
+productRoute.put("/:id", authenticate, updateProduct)
+productRoute.delete("/:id", authenticate, deleteProduct)
 
 module.exports = productRoute;

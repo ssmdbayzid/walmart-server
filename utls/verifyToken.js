@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../schema/userSchema");
+
 
 //------------ Verify Access Token 
 exports.authenticate = async (req, res, next) =>{
@@ -30,15 +30,3 @@ exports.authenticate = async (req, res, next) =>{
     }
 }
 
-// Restric 
-
-exports.restrict = roles => async (req, res, next) =>{
-    const email = req.email;
-    const user = await User.findOne({email})    
-    if(!roles.includes(user.role)){
-        console.log("This is from restrict unauthorized")
-    return res
-    .status(401).json({success: false, message: "User Unauthorized"})
-    }
-    next()
-}
