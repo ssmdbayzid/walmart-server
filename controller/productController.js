@@ -53,13 +53,13 @@ exports.updateProduct = async (req, res)=>{
     console.log(id)
     console.log(req.body)
     try {
-        const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
-            new: true
-        })
-        
+        // const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
+        //     new: true
+        // })       
 
-        return res
-        .status(200).json({message: "Update data successfully", data: updatedProduct})
+        // return res
+        // .status(200).json({message: "Update data successfully", data: updatedProduct})
+        return res.send(200)
     } catch (error) {
         return res
         .status(500).json({success: false, message: error.message })

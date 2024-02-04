@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const  User  = require("../schema/userSchema")
 
 //-------------- Generate Access Token -----------------
 
@@ -11,6 +12,23 @@ const generateRefreshToken = email => {
     return jwt.sign({email: email}, process.env.REFRESH_TOKEN, {expiresIn: "7d"})    
 }
 
+exports.register = async (req, res) =>{
+    try {
+        const newUser = await User.create(req.body)
+
+        const accessToken = generateAccessToken(email)
+        const refreshToken = generateRefreshToken(email)  
+
+       return res
+       .status(200)
+       .json({success: true, message: "Signup successfull",  accessToken, refreshToken, user:newUser})
+
+    } catch (error) {
+        return res
+        .status(500).json({success:false, message: error.message})
+    }
+}
+
 
 exports.getToken = async (req, res)=>{    
     const {email} = req.body;    
@@ -18,11 +36,13 @@ exports.getToken = async (req, res)=>{
     
     try {
         if(email){
+            const user =  await User.findOne({email: email})
+            .populate("orders")
             const accessToken = generateAccessToken(email)
             const refreshToken = generateRefreshToken(email)        
            return res
            .status(200)
-           .json({success: true, message: "Successfully login", accessToken, refreshToken})
+           .json({success: true, message: "Successfully login", accessToken, refreshToken, user:user})
         }
     
     } catch (error) {

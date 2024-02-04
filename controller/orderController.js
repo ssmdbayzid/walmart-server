@@ -1,11 +1,12 @@
 const Order = require("../schema/orderSchema");
+const  User  = require("../schema/userSchema");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc")
 
 
 // -------------------- Create Order -------------------
 exports.createOrder = async (req, res)=>{
 
-    try {
+    try {     
         const {cart} = req.body                      
   
         const newOrder = {               
@@ -16,7 +17,12 @@ exports.createOrder = async (req, res)=>{
         }
         const result = new Order(newOrder)
         await result.save()
-  
+        const  updateUser = await User.findOneAndUpdate({email: req.email}, {
+          $push: {
+            orders: result._id
+          }
+        })
+        console.log(updateUser)
       return res
       .status(200).json({success: true, message: "Order successfully completed", data: result._id})
       } catch (error) {
@@ -37,6 +43,36 @@ exports.getAllOrder = async (req, res)=>{
         return res
         .status(200).json({success: false, message: error.message})
     }
+}
+
+// -------- Get Single Order 
+exports.getSingleOrder = async (req, res)=>{
+    const id = req.params.id
+    try {
+       const data =  await Order.findById(id)      
+    return res
+    .status(200).json({success: true, message: "Geting order successfull", data})
+    } catch (error) {
+        return res
+        .status(200).json({success: false, message: error.message})
+    }
+}
+
+// Update Order
+
+exports.updateOrder = async (req, res)=>{
+  const id = req.params.id
+  
+try {
+  const updateOrder = await Order.findByIdAndUpdate(id, req.body, {new: true})  
+  console.log(updateOrder)
+  return res
+  .status(200).json({success: true, message: "Updated successfull", data: updateOrder})
+  
+} catch (error) {
+  return res.
+  status(500).json({succcess: false, message: error.message})
+}
 }
 
 

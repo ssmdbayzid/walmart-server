@@ -10,6 +10,7 @@ const productRoute = require("./Routes/productRoute")
 const authRoute = require("./Routes/authRoute")
 const orderRoute = require("./Routes/orderRoute")
 const mongoose  = require("mongoose")
+const userRoute = require("./Routes/userRoute")
 
 const corsOptions ={
     origin:'http://localhost:5173', 
@@ -41,6 +42,7 @@ app.get("/", (req, res)=> {
 // -------------- Router  -------------
 app.use("/api/v1/products/", productRoute)
 app.use("/api/v1/auth/", authRoute)
+app.use("/api/v1/user/", userRoute)
 app.use("/api/v1/orders/", orderRoute)
 
 //----------- Server Project ---------------
