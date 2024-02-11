@@ -42,7 +42,7 @@ app.get("/", (req, res)=> {
 // -------------- Router  -------------
 app.use("/api/v1/products/", productRoute)
 app.use("/api/v1/auth/", authRoute)
-app.use("/api/v1/user/", userRoute)
+app.use("/api/v1/users/", userRoute)
 app.use("/api/v1/orders/", orderRoute)
 
 //----------- Server Project ---------------

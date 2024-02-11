@@ -14,14 +14,10 @@ const generateRefreshToken = email => {
 
 exports.register = async (req, res) =>{
     try {
-        const newUser = await User.create(req.body)
-
-        const accessToken = generateAccessToken(email)
-        const refreshToken = generateRefreshToken(email)  
-
+       await User.create(req.body)
        return res
        .status(200)
-       .json({success: true, message: "Signup successfull",  accessToken, refreshToken, user:newUser})
+       .json({success: true, message: "Signup successfull"})
 
     } catch (error) {
         return res
@@ -36,8 +32,17 @@ exports.getToken = async (req, res)=>{
     
     try {
         if(email){
-            const user =  await User.findOne({email: email})
-            .populate("orders")
+            const result =  await User.findOne({email: email}).populate("orders")
+            
+            const {orders, ...rest} = result._doc
+            console.log(result)
+            let user;
+            if(result.role ==="admin"){
+                user = rest                
+            }else {
+                user = result
+            }
+
             const accessToken = generateAccessToken(email)
             const refreshToken = generateRefreshToken(email)        
            return res

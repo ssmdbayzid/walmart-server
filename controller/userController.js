@@ -1,5 +1,15 @@
 const  User  = require("../schema/userSchema");
 
+exports.allUsers = async (req, res) =>{
+    try {
+       const users = await User.find().select("email role")
+        return res
+        .status(200).json({success: true, data: users})
+    } catch (error) {
+        return res
+        .status(500).json({success: false, message:"something wents error"})
+    }
+}
 exports.getUser = async (req, res)=>{
     try {
         const email = req.body.email;
