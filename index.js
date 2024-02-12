@@ -13,7 +13,7 @@ const mongoose  = require("mongoose")
 const userRoute = require("./Routes/userRoute")
 
 const corsOptions ={
-    origin:'http://localhost:5173', 
+    origin:'https://walmart-272ed.web.app/', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
   }
