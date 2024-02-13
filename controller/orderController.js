@@ -6,6 +6,7 @@ const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc")
 // -------------------- Create Order -------------------
 exports.createOrder = async (req, res)=>{
 
+  console.log(req.body)
     try {     
         const {cart} = req.body                      
   
@@ -33,16 +34,17 @@ exports.createOrder = async (req, res)=>{
       }
 }
 
-// -------------------- Get All Order -------------------
-exports.getAllOrder = async (req, res)=>{
-    try {
-       const allOrder =  await Order.find()      
+exports.getAllOrders = async (req, res) =>{
+  try {
+    const orders = await Order.find()
+
     return res
-    .status(200).json({success: true, message: "Get All Order Successfully", data: allOrder})
-    } catch (error) {
-        return res
-        .status(200).json({success: false, message: error.message})
-    }
+    .status(200).json({success: true, message: "Get all orders", data: orders})
+  } catch (error) {
+    console.log(error.message)
+    return res
+    .status(500).json({success: false, message: error.message})
+  }
 }
 
 // -------- Get Single Order 
@@ -70,6 +72,7 @@ try {
   .status(200).json({success: true, message: "Updated successfull", data: updateOrder})
   
 } catch (error) {
+  console.log(error.message)
   return res.
   status(500).json({succcess: false, message: error.message})
 }
@@ -80,7 +83,7 @@ try {
 
 
 const calculateOrderAmount = (items) => {
-    
+  
     const totalAmount = items.reduce((currentValue, item)=> currentValue += item.price, 0)
         
     return totalAmount
@@ -89,7 +92,6 @@ const calculateOrderAmount = (items) => {
 exports.payment = async (req, res)=>{
     const { items } = req.body;
 
-    console.log(items)
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: calculateOrderAmount(items),

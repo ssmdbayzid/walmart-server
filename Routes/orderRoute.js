@@ -1,11 +1,12 @@
-const { createOrder, getAllOrder, payment, getSingleOrder, updateOrder } = require("../controller/orderController");
+const { createOrder,  payment, getSingleOrder, updateOrder, getAllOrders } = require("../controller/orderController");
 const { authenticate, restrict } = require("../utls/verifyToken");
 
 const orderRoute = require("express").Router()
 
 // orderRoute.post("/", authenticate,  createOrder)
-orderRoute.post("/", authenticate, createOrder)
-orderRoute.get("/",  getAllOrder)
+orderRoute.post("/",  createOrder)
+
+orderRoute.get("/",  getAllOrders)
 orderRoute.get("/:id",  getSingleOrder)
 orderRoute.put("/:id",  updateOrder)
 

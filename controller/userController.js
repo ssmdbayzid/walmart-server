@@ -12,8 +12,8 @@ exports.allUsers = async (req, res) =>{
 }
 exports.getUser = async (req, res)=>{
     try {
-        const email = req.body.email;
-        const user =  await User.findOne({email: email})
+        const id = req.params.id
+        const user =  await User.findOne({_id: id})
         .populate("orders")
         if(!user){
             return res.status(500).json({success: false, message: "Invalid credential"})
