@@ -12,12 +12,12 @@ const orderRoute = require("./Routes/orderRoute")
 const mongoose  = require("mongoose")
 const userRoute = require("./Routes/userRoute")
 
-const corsOptions ={
-    origin:'https://walmart-272ed.web.app/', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-  }
+const corsOptions = {
+    origin: "https://walmart-272ed.web.app",
+    credentials: true,
+    optionSuccessStatus: 200
 
+  };
     app.use(express.static("public"));
     app.use(express.json());
     app.use(cors(corsOptions))
