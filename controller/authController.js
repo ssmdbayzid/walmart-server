@@ -32,14 +32,13 @@ exports.getToken = async (req, res)=>{
     
     try {
         if(email){
-            const result =  await User.findOne({email: email}).populate("orders")
-            
-            const {orders, ...rest} = result._doc
-            console.log(result)
             let user;
-            if(result.role ==="admin"){
-                user = rest                
-            }else {
+            const result =  await User.findOne({email: email})              
+            console.log(result)
+            const {orders, ...rest} = result._doc
+            if(result.role == "admin"){
+                user = rest
+            }else{
                 user = result
             }
 

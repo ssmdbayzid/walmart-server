@@ -5,8 +5,7 @@ const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc")
 
 // -------------------- Create Order -------------------
 exports.createOrder = async (req, res)=>{
-
-  console.log(req.body)
+  
     try {     
         const {cart} = req.body                      
   
@@ -18,17 +17,15 @@ exports.createOrder = async (req, res)=>{
         }
         const result = new Order(newOrder)
         await result.save()
-        const  updateUser = await User.findOneAndUpdate({email: req.email}, {
+        const  updateUser = await User.findOneAndUpdate({email: req.body.email}, {
           $push: {
             orders: result._id
           }
         })
-        console.log(updateUser)
       return res
-      .status(200).json({success: true, message: "Order successfully completed", data: result._id})
-      } catch (error) {
-  
-        console.log(error.message)
+      .status(200).json({success: true, message: "Order successfully completed", data: "result._id"})
+      } catch (error) {        
+        console.log(error)
           return res
           .status(500).json({success: false, message: error.message})
       }
