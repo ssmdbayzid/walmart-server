@@ -7,6 +7,8 @@ productRoute.post("/", createProduct)
 productRoute.get("/", getAllproducts)
 productRoute.get("/:id",  getSingleProduct)
 productRoute.put("/:id", authenticate, updateProduct)
+
 productRoute.delete("/:id", authenticate, deleteProduct)
+// productRoute.delete("/:id", authenticate, deleteProduct)
 
 module.exports = productRoute;

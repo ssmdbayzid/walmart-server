@@ -50,16 +50,15 @@ exports.getSingleProduct = async(req, res)=>{
 
 exports.updateProduct = async (req, res)=>{
     const id = req.params.id;
-    console.log(id)
-    console.log(req.body)
+    
     try {
-        // const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
-        //     new: true
-        // })       
-
-        // return res
-        // .status(200).json({message: "Update data successfully", data: updatedProduct})
-        return res.send(200)
+        const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
+            new: true
+        })       
+        
+        return res
+        .status(200).json({message: "Update data successfully", data: updatedProduct})
+        
     } catch (error) {
         return res
         .status(500).json({success: false, message: error.message })
@@ -69,13 +68,12 @@ exports.updateProduct = async (req, res)=>{
 // ------------------ Delete Product ---------------
 
 exports.deleteProduct = async (req, res)=>{
-    const id = req.params.id;
-    console.log("delete", id)
+    const id = req.params.id;    
     try {
-        const deleteProduct = await Product.findByIdAndDelete(id)
+         await Product.findByIdAndDelete(id)
 
         return res
-        .status(200).json({success: true, message: `Delete ${deleteProduct.title} successfully`})
+        .status(200).json({success: true, message: `Delete successfully`})
     } catch (error) {
         return res
         .status(500).json({success: false, message: error.message})
