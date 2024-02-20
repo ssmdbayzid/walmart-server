@@ -55,7 +55,7 @@ exports.updateProduct = async (req, res)=>{
         const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {
             new: true
         })       
-        
+        console.log(updatedProduct)
         return res
         .status(200).json({message: "Update data successfully", data: updatedProduct})
         

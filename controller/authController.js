@@ -5,12 +5,9 @@ const  User  = require("../schema/userSchema")
 
 const generateAccessToken = email => {    
     
-    return jwt.sign({email: email}, process.env.ACCESS_TOKEN, {expiresIn: "1d"})    
+    return jwt.sign({email: email}, process.env.ACCESS_TOKEN, {expiresIn: "2d"})    
 }
-//-------------- Generate Refresh Token -----------------
-const generateRefreshToken = email => {    
-    return jwt.sign({email: email}, process.env.REFRESH_TOKEN, {expiresIn: "7d"})    
-}
+
 
 exports.register = async (req, res) =>{
     try {
@@ -42,11 +39,10 @@ exports.getToken = async (req, res)=>{
                 user = result
             }
 
-            const accessToken = generateAccessToken(email)
-            const refreshToken = generateRefreshToken(email)        
+            const accessToken = generateAccessToken(email)            
            return res
            .status(200)
-           .json({success: true, message: "Successfully login", accessToken, refreshToken, user:user})
+           .json({success: true, message: "Successfully login", accessToken,  user:user})
         }
     
     } catch (error) {
@@ -56,9 +52,4 @@ exports.getToken = async (req, res)=>{
     
 }
 
-exports.refreshToken = async (req, res)=>{  
-    const {email} = req.body;       
-    const accessToken = generateAccessToken(email)
-    return res
-    .status(200).json({success: true, accessToken, data: "New  accesstoken generated"})    
-}
+

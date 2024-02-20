@@ -13,7 +13,8 @@ const mongoose  = require("mongoose")
 const userRoute = require("./Routes/userRoute")
 
 const corsOptions = {
-    origin: "https://walmart-272ed.web.app",    
+    // origin: "https://walmart-272ed.web.app",
+    origin: "http://localhost:5173",
     credentials: true,
     optionSuccessStatus: 200
 
@@ -46,7 +47,7 @@ app.use("/api/v1/users/", userRoute)
 app.use("/api/v1/orders/", orderRoute)
 
 //----------- Server Project ---------------
-// https://walmart-server-gulv625pm-ssmd-bayzid.vercel.app/
+// https://walmart-server.vercel.app/
 
 
 
