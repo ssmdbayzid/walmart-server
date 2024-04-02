@@ -52,4 +52,27 @@ exports.getToken = async (req, res)=>{
     
 }
 
+exports.googleLogin = async (req, res) =>{
+    try {
+               
+        const  user  = await User.findOne({email:req.body.email})
+        if(user){
+           const accessToken = generateAccessToken(req.body.email)      
+           console.log("g user", user)
+           return res
+           .status(200)
+           .json({success: true, message: "Successfully login", accessToken,  user:user})
+        }else{
+            const newUser = await User.create(req.body);
+            const accessToken = generateAccessToken(req.body.email)      
+           console.log("g signup", user)
 
+            return res
+            .status(200)
+            .json({success: true, message: "Successfully login", accessToken,  user:newUser})
+        }
+    } catch (error) {
+        return res
+        .status(200).json({success: false, message: error.message})
+    }
+}

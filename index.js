@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const dotenv = require("dotenv")
 dotenv.config()
-const port = process.env.PORT || 6000
+
 const  cors = require("cors")
 const body_parser = require("body-parser")
 // const connectDB = require("./config/connectDB")
@@ -13,8 +13,8 @@ const mongoose  = require("mongoose")
 const userRoute = require("./Routes/userRoute")
 
 const corsOptions = {
-    // origin: "https://walmart-272ed.web.app",
-    origin: "http://localhost:5173",
+    origin: "https://walmart-272ed.web.app",
+    // origin: "http://localhost:5173",
     credentials: true,
     optionSuccessStatus: 200
 
@@ -27,7 +27,6 @@ const corsOptions = {
 const connectDatabase = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL)
-        console.log("connect database")
     } catch (error) {
         console.log(error.message, "mongodb database conn failed")
     }
@@ -49,9 +48,9 @@ app.use("/api/v1/orders/", orderRoute)
 //----------- Server Project ---------------
 // https://walmart-server.vercel.app/
 
+console.log(process.env.ACCESS_TOKEN)
 
-
-app.listen(port, ()=>{
-    console.log(`ecommerce web running ${port}`)
+app.listen(5000, ()=>{
+    console.log(`ecommerce web running`)
     // connectDB()
 })
